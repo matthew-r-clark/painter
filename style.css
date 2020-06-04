@@ -32,7 +32,7 @@ canvas {
 }
 
 #toolbar {
-  background-color: gray;
+  background-color: rgba(255,255,255,.8);
   padding: 5px;
   display: flex;
   flex-direction: column;
@@ -47,6 +47,11 @@ canvas {
   border-radius: 5px;
   margin: auto;
   margin-bottom: 5px;
+  border: .25px solid gray;
+}
+
+.brush-size:hover, .brush-color:hover {
+  border: .25px solid rgb(36, 36, 36);
 }
 
 .brush-size {

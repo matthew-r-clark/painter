@@ -101,16 +101,18 @@ $(() => {
     },
 
     bindElements: function() {
-      this.$brushSizes = $('.brush-size');
-      this.$brushColors = $('.brush-color');
-      this.$brush = $('#brush');
       this.$canvas = $('canvas');
+      this.$body = $('body');
+      this.$toolbar = $('#toolbar, .brush-size, .brush-color');
+      this.$brush = $('#brush');
+      this.$brushColors = $('.brush-color');
+      this.$brushSizes = $('.brush-size');
     },
 
     bindEvents: function() {
       this.$canvas.mousemove(this.setBrushPosition.bind(this));
-      $('body').mouseover(this.hideBrush.bind(this));
-      $('#toolbar').mouseover(this.hideBrush.bind(this));
+      this.$body.mouseover(this.hideBrush.bind(this));
+      this.$toolbar.mouseover(this.hideBrush.bind(this));
       this.$brush.mousemove(this.displayBrush.bind(this));
       this.$brushColors.click(this.setBrushColor.bind(this));
       this.$brushSizes.click(this.setBrushSize.bind(this));
