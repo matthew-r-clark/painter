@@ -1,5 +1,5 @@
 $(() => {
-  let brushDimensions = {
+  let brushDiameters = {
     large: 17,
     medium: 11,
     small: 5,
@@ -24,7 +24,7 @@ $(() => {
     },
 
     getBrushRadius: function() {
-      return brushDimensions[this.brushSize] / 2;
+      return brushDiameters[this.brushSize] / 2;
     },
 
     displayBrush: function() {
@@ -62,7 +62,7 @@ $(() => {
     },
 
     changeBrushSize: function() {
-      let pixels = brushDimensions[this.brushSize];
+      let pixels = brushDiameters[this.brushSize];
       let pixelsString = this.pixelsToString(pixels);
       this.$brush.css('height', pixelsString);
       this.$brush.css('width', pixelsString);
