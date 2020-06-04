@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Document</title>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="reset.css" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="paint.js"></script>
+</head>
+<body>
+
+  <h1>Painter</h1>
+
+  <div class="container">
+
+    <div id="toolbar">
+
+      <section id="brush-size">
+        <h2>Size</h2>
+        <div class="brush-size" id="brush-large">
+          <div class="brush-dot" id="brush-large-dot"></div>
+        </div>
+        <div class="brush-size" id="brush-medium">
+          <div class="brush-dot" id="brush-medium-dot"></div>
+        </div>
+        <div class="brush-size" id="brush-small">
+          <div class="brush-dot" id="brush-small-dot"></div>
+        </div>
+      </section>
+
+      <section id="brush-color">
+        <h2>Color</h2>
+        <div class="brush-color" id="brush-red"></div>
+        <div class="brush-color" id="brush-green"></div>
+        <div class="brush-color" id="brush-blue"></div>
+        <div class="brush-color" id="brush-black"></div>
+        <div class="brush-color" id="brush-white"></div>
+      </section>
+
+    </div>
+
+    <canvas height="400" width="600"></canvas>
+
+  </div>
+
+  <div id="brush" style="display:none;"></div>
+</body>
+</html>
