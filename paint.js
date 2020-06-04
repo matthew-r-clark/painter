@@ -13,13 +13,13 @@ $(() => {
     },
     brushColor: 'black',
 
-    changeBrushPosition: function(event) {
-      this.displayBrush();
+    setBrushPosition: function(event) {
       let radius = this.getBrushRadius();
       this.brushPosition = {
         x: event.clientX - radius,
         y: event.clientY - radius,
       };
+      this.displayBrush();
       this.drawBrush();
     },
 
@@ -31,17 +31,26 @@ $(() => {
       this.$brush.toggle(true);
     },
 
-    hideBrush: function(event) {
-      if (event.currentTarget === event.target) {
-        let $brush = this.$brush
-        setTimeout(() => $brush.toggle(false), 0);
-      }
+    drawBrush: function() {
+      this.changeBrushPosition();
+      this.changeBrushColor();
+      this.changeBrushSize();
     },
 
-    changeBrushColor: function(event) {
-      let color = event.target.id.split('-')[1];
-      this.brushColor = color;
-      this.drawBrush();
+    changeBrushPosition: function() {
+      x = this.pixelsToString(this.brushPosition.x);
+      y = this.pixelsToString(this.brushPosition.y);
+      this.$brush.css('left', x);
+      this.$brush.css('top', y);
+    },
+
+    pixelsToString: function(pixels) {
+      return String(pixels) + 'px';
+    },
+
+    changeBrushColor: function() {
+      this.$brush.css('background-color', this.brushColor);
+      this.setBrushBorderColor(this.brushColor);
     },
 
     setBrushBorderColor: function(brushColor) {
@@ -52,35 +61,7 @@ $(() => {
       }
     },
 
-    changeBrushSize: function(event) {
-      let size = event.target.id.split('-')[1];
-      this.brushSize = size;
-      this.drawBrush();
-    },
-
-    applyPaint: function(event) {
-      console.log('mouse button: ' + event.button);
-    },
-
-    drawBrush: function() {
-      this.positionBrush();
-      this.setBrushColor();
-      this.setBrushSize();
-    },
-
-    positionBrush: function() {
-      x = this.pixelsToString(this.brushPosition.x);
-      y = this.pixelsToString(this.brushPosition.y);
-      this.$brush.css('left', x);
-      this.$brush.css('top', y);
-    },
-
-    setBrushColor: function() {
-      this.$brush.css('background-color', this.brushColor);
-      this.setBrushBorderColor(this.brushColor);
-    },
-
-    setBrushSize: function() {
+    changeBrushSize: function() {
       let pixels = brushDimensions[this.brushSize];
       let pixelsString = this.pixelsToString(pixels);
       this.$brush.css('height', pixelsString);
@@ -88,8 +69,35 @@ $(() => {
       this.$brush.css('border-radius', pixelsString);
     },
 
-    pixelsToString: function(pixels) {
-      return String(pixels) + 'px';
+    hideBrush: function(event) {
+      if (event.currentTarget === event.target) {
+        let $brush = this.$brush
+        setTimeout(() => $brush.toggle(false), 0);
+      }
+    },
+
+    setBrushColor: function(event) {
+      let color = this.getColorFromElementId(event.target.id);
+      this.brushColor = color;
+      this.drawBrush();
+    },
+
+    getColorFromElementId: function(id) {
+      return this.extractColorOrSizeFromElementId(id);
+    },
+
+    extractColorOrSizeFromElementId: function(id) {
+      return id.split('-')[1];
+    },
+
+    setBrushSize: function(event) {
+      let size = this.getSizeFromElementId(event.target.id);
+      this.brushSize = size;
+      this.drawBrush();
+    },
+
+    getSizeFromElementId: function(id) {
+      return this.extractColorOrSizeFromElementId(id);
     },
 
     bindElements: function() {
@@ -100,14 +108,12 @@ $(() => {
     },
 
     bindEvents: function() {
-      this.$canvas.mousemove(this.changeBrushPosition.bind(this));
-      // this.$canvas.click(this.applyPaint.bind(this));
-      this.$brush.mousedown(this.applyPaint.bind(this));
+      this.$canvas.mousemove(this.setBrushPosition.bind(this));
       $('body').mouseover(this.hideBrush.bind(this));
       $('#toolbar').mouseover(this.hideBrush.bind(this));
       this.$brush.mousemove(this.displayBrush.bind(this));
-      this.$brushColors.click(this.changeBrushColor.bind(this));
-      this.$brushSizes.click(this.changeBrushSize.bind(this));
+      this.$brushColors.click(this.setBrushColor.bind(this));
+      this.$brushSizes.click(this.setBrushSize.bind(this));
     },
 
     init: function() {
