@@ -39,19 +39,29 @@ canvas {
   justify-content: space-around;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
+  border-right: 1px solid gray;
 }
 
-.brush-size, .brush-color, .history {
+.brush-size,
+.brush-color,
+#palette-wrapper,
+.history {
   height: 25px;
   width: 25px;
   border-radius: 5px;
   margin: auto;
   margin-bottom: 5px;
   box-shadow: 1px 1px 1px rgb(36, 36, 36);
+  border: 1px solid rgb(36, 36, 36);
+}
+
+#brush-black {
+  border: 1px solid rgb(54, 54, 54);
 }
 
 .brush-size:hover,
 .brush-color:hover,
+#palette-wrapper:hover,
 .history:hover {
   box-shadow: -1px -1px 1px rgb(36, 36, 36);
   position: relative;
@@ -66,6 +76,22 @@ canvas {
 .history {
   text-align: center;
   cursor: default;
+}
+
+#undo-icon {
+  transform: rotate(-90deg);
+}
+
+#undo-icon:hover {
+  transform: rotate(-180deg);
+}
+
+#redo-icon {
+  transform: rotate(90deg);
+}
+
+#redo-icon:hover {
+  transform: rotate(180deg);
 }
 
 #brush-red {
@@ -116,4 +142,26 @@ canvas {
   border-radius: 5px;
   background-color: black;
   cursor: none;
+}
+
+#palette {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 255px;
+}
+
+#palette div {
+  width: 3px;
+  height: 3px;
+}
+
+#palette {
+    opacity: 0;
+}
+
+p {
+  color: white;
+  text-align: center;
+  margin-top: 25px;
 }

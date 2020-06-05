@@ -88,7 +88,8 @@ $(() => {
       this.changeBrushSize();
     },
 
-    startDrawing: function() {
+    startDrawing: function(event) {
+      event.preventDefault();
       this.isDrawing = true;
       this.context.beginPath();
     },
@@ -120,7 +121,7 @@ $(() => {
       if (brushColor === 'white') {
         this.$brush.css('border', '.25px solid gray');
       } else {
-        this.$brush.css('border', 'none');
+        this.$brush.css('border', '.25px solid white');
       }
     },
 
@@ -163,6 +164,19 @@ $(() => {
       return this.extractColorOrSizeFromElementId(id);
     },
 
+    undoLastMark: function(event) {
+      if (event.keyCode === 90 && event.ctrlKey) {
+
+      }
+    },
+
+    setCustomColor: function(event) {
+      let color = event.target.value;
+      $('#palette-wrapper').css('background-color', color);
+      this.brushColor = color;
+      this.drawBrush();
+    },
+
     bindElements: function() {
       this.$canvas = $('canvas');
       this.$body = $('body');
@@ -170,6 +184,7 @@ $(() => {
       this.$brush = $('#brush');
       this.$brushColors = $('.brush-color');
       this.$brushSizes = $('.brush-size');
+      this.$palette = $('#palette');
 
       let canvas = document.querySelector('canvas');
       this.context = canvas.getContext('2d');
@@ -184,6 +199,8 @@ $(() => {
       this.$brush.mousemove(this.displayBrush.bind(this));
       this.$brushColors.click(this.setBrushColor.bind(this));
       this.$brushSizes.click(this.setBrushSize.bind(this));
+      $(document).keydown(this.undoLastMark.bind(this));
+      this.$palette.change(this.setCustomColor.bind(this));
     },
 
     init: function() {

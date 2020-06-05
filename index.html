@@ -36,12 +36,19 @@
         <div class="brush-color" id="brush-blue"></div>
         <div class="brush-color" id="brush-black"></div>
         <div class="brush-color" id="brush-white"></div>
+        <div id="palette-wrapper">
+          <input type="color" id="palette"></input>
+        </div>
       </section>
 
       <section id="history">
         <h2>History</h2>
-        <div class="history" id="undo">&#x21BA;</div>
-        <div class="history" id="redo">&#x21BB;</div>
+        <div class="history" id="undo">
+          <div id="undo-icon">&#x21BA;</div>
+        </div>
+        <div class="history" id="redo">
+          <div id="redo-icon">&#x21BB;</div>
+        </div>
       </section>
 
     </div>
@@ -49,6 +56,8 @@
     <canvas height="400" width="600"></canvas>
 
   </div>
+
+  <p>Sorry, undo/redo buttons don't work yet :(</p>
 
   <div id="brush" style="display:none;"></div>
 </body>
