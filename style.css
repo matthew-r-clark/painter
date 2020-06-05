@@ -158,6 +158,7 @@ canvas {
 
 #palette {
     opacity: 0;
+    width: 25px;
 }
 
 p {
