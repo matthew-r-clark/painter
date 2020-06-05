@@ -47,11 +47,11 @@ canvas {
   border-radius: 5px;
   margin: auto;
   margin-bottom: 5px;
-  box-shadow: 1px 1px 1px gray;
+  box-shadow: 1px 1px 1px rgb(36, 36, 36);
 }
 
 .brush-size:hover, .brush-color:hover {
-  box-shadow: -1px -1px 1px gray;
+  box-shadow: -1px -1px 1px rgb(36, 36, 36);
   position: relative;
   top: 1px;
   left: 1px;
